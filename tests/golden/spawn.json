@@ -1,0 +1,462 @@
+{
+  "scenario": "spawn",
+  "beats": [
+    {
+      "beat": "玩家「阿凯」入场（player-1），召唤物额度 3 格",
+      "tick": 0,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        }
+      ]
+    },
+    {
+      "beat": "同刻提交两个召唤请求：苍狼、猎鹰",
+      "tick": 0,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": []
+    },
+    {
+      "beat": "tick 处理：两个请求都被接受，额度占用 2/3；两者继承阿凯的姿态与命令来源",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-2",
+          "entityId": "summon-2"
+        }
+      ]
+    },
+    {
+      "beat": "阿凯切换为进攻姿态（自身指令）",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "command-issued",
+          "commanderId": "player-1",
+          "targetId": "player-1",
+          "command": {
+            "type": "set-stance",
+            "stance": "aggressive"
+          }
+        }
+      ]
+    },
+    {
+      "beat": "第三只「石卫」生成，继承当前进攻姿态；额度 3/3 占满",
+      "tick": 2,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "石卫",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "石卫",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 2,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 2,
+          "type": "request-accepted",
+          "requestId": "req-3",
+          "entityId": "summon-3"
+        }
+      ]
+    },
+    {
+      "beat": "推进 1 tick：所有召唤物寿命 -1（面板可见剩余寿命递减）",
+      "tick": 3,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "石卫",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "aggressive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": []
+    }
+  ]
+}

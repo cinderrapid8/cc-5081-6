@@ -1,0 +1,1251 @@
+{
+  "scenario": "replace",
+  "beats": [
+    {
+      "beat": "阿凯入场，本场景连续替换 8 次，验证额度恒不超上限",
+      "tick": 0,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        }
+      ]
+    },
+    {
+      "beat": "第 1 次召唤：额度 1/3",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        }
+      ]
+    },
+    {
+      "beat": "第 2 次召唤：额度 2/3",
+      "tick": 2,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 2,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 2,
+          "type": "request-accepted",
+          "requestId": "req-2",
+          "entityId": "summon-2"
+        }
+      ]
+    },
+    {
+      "beat": "第 3 次召唤：额度 3/3",
+      "tick": 3,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 3,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 3,
+          "type": "spawned",
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 3,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 3,
+          "type": "request-accepted",
+          "requestId": "req-3",
+          "entityId": "summon-3"
+        }
+      ]
+    },
+    {
+      "beat": "第 4 次召唤：额度 3/3，最老者被替换并写入回收原因",
+      "tick": 4,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-4"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 4
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 3,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-4",
+          "kind": "summon",
+          "name": "战宠4号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 4,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 4,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 4,
+          "type": "recycled",
+          "id": "summon-1",
+          "reason": {
+            "type": "replaced",
+            "by": "summon-4"
+          }
+        },
+        {
+          "tick": 4,
+          "type": "spawned",
+          "id": "summon-4",
+          "kind": "summon",
+          "name": "战宠4号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 4,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 4,
+          "type": "request-accepted",
+          "requestId": "req-4",
+          "entityId": "summon-4"
+        }
+      ]
+    },
+    {
+      "beat": "第 5 次召唤：额度 3/3，最老者被替换并写入回收原因",
+      "tick": 5,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-4"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 4
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-5"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 5
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 3,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-4",
+          "kind": "summon",
+          "name": "战宠4号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 4,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-5",
+          "kind": "summon",
+          "name": "战宠5号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 5,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 5,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 5,
+          "type": "recycled",
+          "id": "summon-2",
+          "reason": {
+            "type": "replaced",
+            "by": "summon-5"
+          }
+        },
+        {
+          "tick": 5,
+          "type": "spawned",
+          "id": "summon-5",
+          "kind": "summon",
+          "name": "战宠5号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 5,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 5,
+          "type": "request-accepted",
+          "requestId": "req-5",
+          "entityId": "summon-5"
+        }
+      ]
+    },
+    {
+      "beat": "第 6 次召唤：额度 3/3，最老者被替换并写入回收原因",
+      "tick": 6,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-4"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 4
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-5"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 5
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-6"
+          },
+          "spawnedAtTick": 3,
+          "recycledAtTick": 6
+        },
+        {
+          "id": "summon-4",
+          "kind": "summon",
+          "name": "战宠4号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 4,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-5",
+          "kind": "summon",
+          "name": "战宠5号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 5,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-6",
+          "kind": "summon",
+          "name": "战宠6号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 6,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 6,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 6,
+          "type": "recycled",
+          "id": "summon-3",
+          "reason": {
+            "type": "replaced",
+            "by": "summon-6"
+          }
+        },
+        {
+          "tick": 6,
+          "type": "spawned",
+          "id": "summon-6",
+          "kind": "summon",
+          "name": "战宠6号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 6,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 6,
+          "type": "request-accepted",
+          "requestId": "req-6",
+          "entityId": "summon-6"
+        }
+      ]
+    },
+    {
+      "beat": "第 7 次召唤：额度 3/3，最老者被替换并写入回收原因",
+      "tick": 7,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-4"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 4
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-5"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 5
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-6"
+          },
+          "spawnedAtTick": 3,
+          "recycledAtTick": 6
+        },
+        {
+          "id": "summon-4",
+          "kind": "summon",
+          "name": "战宠4号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-7"
+          },
+          "spawnedAtTick": 4,
+          "recycledAtTick": 7
+        },
+        {
+          "id": "summon-5",
+          "kind": "summon",
+          "name": "战宠5号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 5,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-6",
+          "kind": "summon",
+          "name": "战宠6号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 6,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-7",
+          "kind": "summon",
+          "name": "战宠7号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 7,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 7,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 7,
+          "type": "recycled",
+          "id": "summon-4",
+          "reason": {
+            "type": "replaced",
+            "by": "summon-7"
+          }
+        },
+        {
+          "tick": 7,
+          "type": "spawned",
+          "id": "summon-7",
+          "kind": "summon",
+          "name": "战宠7号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 7,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 7,
+          "type": "request-accepted",
+          "requestId": "req-7",
+          "entityId": "summon-7"
+        }
+      ]
+    },
+    {
+      "beat": "第 8 次召唤：额度 3/3，最老者被替换并写入回收原因",
+      "tick": 8,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "战宠1号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-4"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 4
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "战宠2号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-5"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 5
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "战宠3号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-6"
+          },
+          "spawnedAtTick": 3,
+          "recycledAtTick": 6
+        },
+        {
+          "id": "summon-4",
+          "kind": "summon",
+          "name": "战宠4号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-7"
+          },
+          "spawnedAtTick": 4,
+          "recycledAtTick": 7
+        },
+        {
+          "id": "summon-5",
+          "kind": "summon",
+          "name": "战宠5号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "replaced",
+            "by": "summon-8"
+          },
+          "spawnedAtTick": 5,
+          "recycledAtTick": 8
+        },
+        {
+          "id": "summon-6",
+          "kind": "summon",
+          "name": "战宠6号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 10,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 6,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-7",
+          "kind": "summon",
+          "name": "战宠7号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 7,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-8",
+          "kind": "summon",
+          "name": "战宠8号",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 8,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 8,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 8,
+          "type": "recycled",
+          "id": "summon-5",
+          "reason": {
+            "type": "replaced",
+            "by": "summon-8"
+          }
+        },
+        {
+          "tick": 8,
+          "type": "spawned",
+          "id": "summon-8",
+          "kind": "summon",
+          "name": "战宠8号",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 8,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 8,
+          "type": "request-accepted",
+          "requestId": "req-8",
+          "entityId": "summon-8"
+        }
+      ]
+    }
+  ]
+}

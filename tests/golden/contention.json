@@ -1,0 +1,312 @@
+{
+  "scenario": "contention",
+  "beats": [
+    {
+      "beat": "阿凯已有 2/3 只召唤物，仅剩 1 个空位",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-2",
+          "entityId": "summon-2"
+        }
+      ]
+    },
+    {
+      "beat": "同一 tick 内到达 3 个召唤请求（策略：满员即拒）",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": []
+    },
+    {
+      "beat": "tick 仲裁：按提交顺序仅「甲」被接受，乙、丙以 quota full 拒绝；额度恰好 3/3",
+      "tick": 2,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "猎鹰",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "甲",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "summon-3",
+          "kind": "summon",
+          "name": "甲",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 2,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 3,
+          "cap": 3
+        },
+        {
+          "tick": 2,
+          "type": "request-accepted",
+          "requestId": "req-3",
+          "entityId": "summon-3"
+        },
+        {
+          "tick": 2,
+          "type": "request-rejected",
+          "requestId": "req-4",
+          "why": "quota full: summon:player-1"
+        },
+        {
+          "tick": 2,
+          "type": "request-rejected",
+          "requestId": "req-5",
+          "why": "quota full: summon:player-1"
+        }
+      ]
+    }
+  ]
+}

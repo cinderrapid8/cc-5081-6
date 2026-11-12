@@ -1,0 +1,466 @@
+{
+  "scenario": "exit",
+  "beats": [
+    {
+      "beat": "阿凯召出「短命萤火」与「苍狼」",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "短命萤火",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "短命萤火",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-2",
+          "entityId": "summon-2"
+        }
+      ]
+    },
+    {
+      "beat": "萤火造成一次伤害，效果来源已记录（稍后要验证死后仍可追溯）",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "短命萤火",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "effect-recorded",
+          "effectId": "fx-1",
+          "sourceId": "summon-1",
+          "rootId": "player-1"
+        }
+      ]
+    },
+    {
+      "beat": "阿凯手动遣散苍狼 → 进入 exiting 状态（宽限期内仍占额度）",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "短命萤火",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "exiting",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 2,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "exit-began",
+          "id": "summon-2",
+          "finalizeTick": 3,
+          "reason": {
+            "type": "dismissed",
+            "by": "player-1"
+          }
+        }
+      ]
+    },
+    {
+      "beat": "连续推进 tick：萤火寿命到期 → exiting → 回收；苍狼宽限期结束 → 回收",
+      "tick": 15,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "短命萤火",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 15
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "dismissed",
+            "by": "player-1"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 3
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 3,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 3,
+          "type": "recycled",
+          "id": "summon-2",
+          "reason": {
+            "type": "dismissed",
+            "by": "player-1"
+          }
+        },
+        {
+          "tick": 13,
+          "type": "exit-began",
+          "id": "summon-1",
+          "finalizeTick": 15,
+          "reason": {
+            "type": "lifespan-expired"
+          }
+        },
+        {
+          "tick": 15,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "tick": 15,
+          "type": "recycled",
+          "id": "summon-1",
+          "reason": {
+            "type": "lifespan-expired"
+          }
+        }
+      ]
+    },
+    {
+      "beat": "查询 fx-1 的合法来源：短命萤火 → 阿凯（萤火已回收仍可定位）",
+      "tick": 15,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "短命萤火",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 15
+        },
+        {
+          "id": "summon-2",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "dismissed",
+            "by": "player-1"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 3
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": []
+    }
+  ]
+}

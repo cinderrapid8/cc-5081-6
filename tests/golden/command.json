@@ -1,0 +1,933 @@
+{
+  "scenario": "command",
+  "beats": [
+    {
+      "beat": "阿凯携「苍狼」入场，场上出现敌对目标「野猪王」",
+      "tick": 1,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        },
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null
+        },
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        }
+      ]
+    },
+    {
+      "beat": "阿凯命令苍狼攻击野猪王 → 接受（阿凯在苍狼的命令链上）",
+      "tick": 1,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "command-issued",
+          "commanderId": "player-1",
+          "targetId": "summon-1",
+          "command": {
+            "type": "attack",
+            "targetId": "hostile-1"
+          }
+        }
+      ]
+    },
+    {
+      "beat": "苍狼产出附属对象「哨戒炮台」，自动继承苍狼的当前目标",
+      "tick": 2,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "哨戒炮台",
+          "ownerId": "summon-1",
+          "ownerName": "苍狼",
+          "commanderId": "summon-1",
+          "commanderName": "苍狼",
+          "commandWhy": "takes orders from 苍狼",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "哨戒炮台",
+          "ownerId": "summon-1"
+        },
+        {
+          "tick": 2,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "tick": 2,
+          "type": "request-accepted",
+          "requestId": "req-2",
+          "entityId": "subordinate-1"
+        }
+      ]
+    },
+    {
+      "beat": "阿凯让炮台攻击野猪王 → 接受（与主人目标一致）",
+      "tick": 2,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "哨戒炮台",
+          "ownerId": "summon-1",
+          "ownerName": "苍狼",
+          "commanderId": "summon-1",
+          "commanderName": "苍狼",
+          "commandWhy": "takes orders from 苍狼",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "command-issued",
+          "commanderId": "player-1",
+          "targetId": "subordinate-1",
+          "command": {
+            "type": "attack",
+            "targetId": "hostile-1"
+          }
+        }
+      ]
+    },
+    {
+      "beat": "阿凯让炮台改打「野狼」→ 拒绝：subordinate may only attack the current target of its owner",
+      "tick": 2,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "hostile-2",
+          "kind": "hostile",
+          "name": "野狼",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-2",
+          "commanderName": "野狼",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "哨戒炮台",
+          "ownerId": "summon-1",
+          "ownerName": "苍狼",
+          "commanderId": "summon-1",
+          "commanderName": "苍狼",
+          "commandWhy": "takes orders from 苍狼",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "hostile-2",
+          "kind": "hostile",
+          "name": "野狼",
+          "ownerId": null
+        },
+        {
+          "tick": 2,
+          "type": "command-rejected",
+          "commanderId": "player-1",
+          "targetId": "subordinate-1",
+          "why": "subordinate may only attack the current target of its owner"
+        }
+      ]
+    },
+    {
+      "beat": "无关玩家贝蒂试图指挥苍狼 → 拒绝：commander is not in the ownership chain of the target",
+      "tick": 2,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "hostile-2",
+          "kind": "hostile",
+          "name": "野狼",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-2",
+          "commanderName": "野狼",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "哨戒炮台",
+          "ownerId": "summon-1",
+          "ownerName": "苍狼",
+          "commanderId": "summon-1",
+          "commanderName": "苍狼",
+          "commandWhy": "takes orders from 苍狼",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "command-rejected",
+          "commanderId": "player-2",
+          "targetId": "summon-1",
+          "why": "commander is not in the ownership chain of the target"
+        }
+      ]
+    },
+    {
+      "beat": "炮台对野猪王造成伤害，效果来源记入归属日志（炮台 → 苍狼 → 阿凯）",
+      "tick": 2,
+      "views": [
+        {
+          "id": "hostile-1",
+          "kind": "hostile",
+          "name": "野猪王",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-1",
+          "commanderName": "野猪王",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "hostile-2",
+          "kind": "hostile",
+          "name": "野狼",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "hostile-2",
+          "commanderName": "野狼",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "哨戒炮台",
+          "ownerId": "summon-1",
+          "ownerName": "苍狼",
+          "commanderId": "summon-1",
+          "commanderName": "苍狼",
+          "commandWhy": "takes orders from 苍狼",
+          "stance": "defensive",
+          "currentTargetId": "hostile-1",
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 2,
+          "type": "effect-recorded",
+          "effectId": "fx-1",
+          "sourceId": "subordinate-1",
+          "rootId": "player-1"
+        }
+      ]
+    }
+  ]
+}

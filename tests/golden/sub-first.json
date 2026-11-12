@@ -1,0 +1,609 @@
+{
+  "scenario": "sub-first",
+  "beats": [
+    {
+      "beat": "魔像产出炮台甲、炮台乙：附属额度 2/2，归属链 阿凯→魔像→炮台",
+      "tick": 2,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "工程师魔像",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 11,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "炮台甲",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": "summon-1",
+          "commanderName": "工程师魔像",
+          "commandWhy": "takes orders from 工程师魔像",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-2",
+          "kind": "subordinate",
+          "name": "炮台乙",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": "summon-1",
+          "commanderName": "工程师魔像",
+          "commandWhy": "takes orders from 工程师魔像",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 2,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 2,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "工程师魔像",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        },
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "炮台甲",
+          "ownerId": "summon-1"
+        },
+        {
+          "tick": 2,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "tick": 2,
+          "type": "request-accepted",
+          "requestId": "req-2",
+          "entityId": "subordinate-1"
+        },
+        {
+          "tick": 2,
+          "type": "spawned",
+          "id": "subordinate-2",
+          "kind": "subordinate",
+          "name": "炮台乙",
+          "ownerId": "summon-1"
+        },
+        {
+          "tick": 2,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 2,
+          "cap": 2
+        },
+        {
+          "tick": 2,
+          "type": "request-accepted",
+          "requestId": "req-3",
+          "entityId": "subordinate-2"
+        }
+      ]
+    },
+    {
+      "beat": "推进 tick：两座炮台寿命短先回收（原因：寿命到期），魔像仍在场",
+      "tick": 10,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "工程师魔像",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 3,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "炮台甲",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 10
+        },
+        {
+          "id": "subordinate-2",
+          "kind": "subordinate",
+          "name": "炮台乙",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 10
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 0,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 8,
+          "type": "exit-began",
+          "id": "subordinate-1",
+          "finalizeTick": 10,
+          "reason": {
+            "type": "lifespan-expired"
+          }
+        },
+        {
+          "tick": 8,
+          "type": "exit-began",
+          "id": "subordinate-2",
+          "finalizeTick": 10,
+          "reason": {
+            "type": "lifespan-expired"
+          }
+        },
+        {
+          "tick": 10,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "tick": 10,
+          "type": "recycled",
+          "id": "subordinate-1",
+          "reason": {
+            "type": "lifespan-expired"
+          }
+        },
+        {
+          "tick": 10,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 0,
+          "cap": 2
+        },
+        {
+          "tick": 10,
+          "type": "recycled",
+          "id": "subordinate-2",
+          "reason": {
+            "type": "lifespan-expired"
+          }
+        }
+      ]
+    },
+    {
+      "beat": "附属额度已释放，补召「炮台丙」成功；魔像本身额度未受连带影响",
+      "tick": 11,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "工程师魔像",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 2,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "炮台甲",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 10
+        },
+        {
+          "id": "subordinate-2",
+          "kind": "subordinate",
+          "name": "炮台乙",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 10
+        },
+        {
+          "id": "subordinate-3",
+          "kind": "subordinate",
+          "name": "炮台丙",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": "summon-1",
+          "commanderName": "工程师魔像",
+          "commandWhy": "takes orders from 工程师魔像",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 6,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 11,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 11,
+          "type": "spawned",
+          "id": "subordinate-3",
+          "kind": "subordinate",
+          "name": "炮台丙",
+          "ownerId": "summon-1"
+        },
+        {
+          "tick": 11,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 1,
+          "cap": 2
+        },
+        {
+          "tick": 11,
+          "type": "request-accepted",
+          "requestId": "req-4",
+          "entityId": "subordinate-3"
+        }
+      ]
+    },
+    {
+      "beat": "遣散魔像 → 炮台丙被级联回收，回收原因标注「归属对象被回收」",
+      "tick": 14,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "工程师魔像",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "dismissed",
+            "by": "player-1"
+          },
+          "spawnedAtTick": 1,
+          "recycledAtTick": 13
+        },
+        {
+          "id": "subordinate-1",
+          "kind": "subordinate",
+          "name": "炮台甲",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 10
+        },
+        {
+          "id": "subordinate-2",
+          "kind": "subordinate",
+          "name": "炮台乙",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "lifespan-expired"
+          },
+          "spawnedAtTick": 2,
+          "recycledAtTick": 10
+        },
+        {
+          "id": "subordinate-3",
+          "kind": "subordinate",
+          "name": "炮台丙",
+          "ownerId": "summon-1",
+          "ownerName": "工程师魔像",
+          "commanderId": null,
+          "commanderName": null,
+          "commandWhy": "recycled — no commander",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "recycled",
+          "available": true,
+          "recycleReason": {
+            "type": "owner-recycled",
+            "ownerId": "summon-1"
+          },
+          "spawnedAtTick": 11,
+          "recycledAtTick": 13
+        }
+      ],
+      "quota": [
+        {
+          "key": "subordinate:summon-1",
+          "used": 0,
+          "cap": 2
+        },
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 11,
+          "type": "exit-began",
+          "id": "summon-1",
+          "finalizeTick": 13,
+          "reason": {
+            "type": "dismissed",
+            "by": "player-1"
+          }
+        },
+        {
+          "tick": 13,
+          "type": "quota-changed",
+          "key": "subordinate:summon-1",
+          "used": 0,
+          "cap": 2
+        },
+        {
+          "tick": 13,
+          "type": "recycled",
+          "id": "subordinate-3",
+          "reason": {
+            "type": "owner-recycled",
+            "ownerId": "summon-1"
+          }
+        },
+        {
+          "tick": 13,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "tick": 13,
+          "type": "recycled",
+          "id": "summon-1",
+          "reason": {
+            "type": "dismissed",
+            "by": "player-1"
+          }
+        }
+      ]
+    }
+  ]
+}

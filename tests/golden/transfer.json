@@ -1,0 +1,445 @@
+{
+  "scenario": "transfer",
+  "beats": [
+    {
+      "beat": "阿凯的苍狼先造成一次伤害（fx-1，归属阿凯）",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1",
+          "ownerName": "阿凯",
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "takes orders from 阿凯",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 0,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null
+        },
+        {
+          "tick": 0,
+          "type": "spawned",
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null
+        },
+        {
+          "tick": 1,
+          "type": "spawned",
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-1"
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "request-accepted",
+          "requestId": "req-1",
+          "entityId": "summon-1"
+        },
+        {
+          "tick": 1,
+          "type": "effect-recorded",
+          "effectId": "fx-1",
+          "sourceId": "summon-1",
+          "rootId": "player-1"
+        }
+      ]
+    },
+    {
+      "beat": "苍狼转让给贝蒂：身份不变、不是销毁；额度从阿凯池迁移到贝蒂池",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-2",
+          "ownerName": "贝蒂",
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "takes orders from 贝蒂 (ownership transferred)",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "quota-changed",
+          "key": "summon:player-2",
+          "used": 1,
+          "cap": 3
+        },
+        {
+          "tick": 1,
+          "type": "ownership-transferred",
+          "id": "summon-1",
+          "fromOwnerId": "player-1",
+          "toOwnerId": "player-2"
+        }
+      ]
+    },
+    {
+      "beat": "转让后再次伤害（fx-2）：新效果归属贝蒂，旧效果 fx-1 仍归属阿凯",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-2",
+          "ownerName": "贝蒂",
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "takes orders from 贝蒂 (ownership transferred)",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": [
+        {
+          "tick": 1,
+          "type": "effect-recorded",
+          "effectId": "fx-2",
+          "sourceId": "summon-1",
+          "rootId": "player-2"
+        }
+      ]
+    },
+    {
+      "beat": "尝试把苍狼挂到自己名下 → 拒绝：a summon must be owned by a player",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-2",
+          "ownerName": "贝蒂",
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "takes orders from 贝蒂 (ownership transferred)",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": []
+    },
+    {
+      "beat": "fx-1 合法来源：阿凯；fx-2 合法来源：贝蒂",
+      "tick": 1,
+      "views": [
+        {
+          "id": "player-1",
+          "kind": "player",
+          "name": "阿凯",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-1",
+          "commanderName": "阿凯",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "player-2",
+          "kind": "player",
+          "name": "贝蒂",
+          "ownerId": null,
+          "ownerName": null,
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "self-directed",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": null,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 0,
+          "recycledAtTick": null
+        },
+        {
+          "id": "summon-1",
+          "kind": "summon",
+          "name": "苍狼",
+          "ownerId": "player-2",
+          "ownerName": "贝蒂",
+          "commanderId": "player-2",
+          "commanderName": "贝蒂",
+          "commandWhy": "takes orders from 贝蒂 (ownership transferred)",
+          "stance": "defensive",
+          "currentTargetId": null,
+          "lifespanRemaining": 12,
+          "status": "active",
+          "available": true,
+          "recycleReason": null,
+          "spawnedAtTick": 1,
+          "recycledAtTick": null
+        }
+      ],
+      "quota": [
+        {
+          "key": "summon:player-1",
+          "used": 0,
+          "cap": 3
+        },
+        {
+          "key": "summon:player-2",
+          "used": 1,
+          "cap": 3
+        }
+      ],
+      "events": []
+    }
+  ]
+}
