@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>召唤物运行模块 · 演示面板</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #14171c;
+        --panel: #1d222a;
+        --line: #2e3540;
+        --text: #d7dde6;
+        --dim: #8b95a3;
+        --accent: #6cb2ff;
+        --warn: #ffb86c;
+        --dead: #5c6470;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 14px;
+      }
+      header.app {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      header.app h1 { margin: 0 0 4px; font-size: 18px; }
+      header.app p { margin: 0; color: var(--dim); }
+      #controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+      }
+      button {
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+      button:hover { border-color: var(--accent); }
+      button.action { border-color: var(--accent); }
+      #panel { padding: 12px 20px 40px; }
+      .panel-header h2 { margin: 8px 0 4px; font-size: 16px; }
+      .panel-header .desc { margin: 0 0 4px; color: var(--dim); }
+      .panel-header .tick { margin: 0; color: var(--accent); }
+      h3 { font-size: 14px; margin: 18px 0 8px; color: var(--dim); }
+      table.entities { border-collapse: collapse; width: 100%; }
+      table.entities th, table.entities td {
+        border: 1px solid var(--line);
+        padding: 5px 8px;
+        text-align: left;
+        white-space: nowrap;
+      }
+      table.entities th { background: var(--panel); color: var(--dim); font-weight: normal; }
+      tr.status-exiting td { color: var(--warn); }
+      tr.status-recycled td { color: var(--dead); text-decoration: line-through; }
+      tr.status-recycled td:last-child { text-decoration: none; color: var(--warn); }
+      .quotas { display: flex; flex-wrap: wrap; gap: 8px; }
+      .quota {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 3px 10px;
+        color: var(--dim);
+      }
+      .quota-full { border-color: var(--warn); color: var(--warn); }
+      ul.events, ul.effects, ol.beats { margin: 0; padding-left: 20px; }
+      ul.events li, ul.effects li, ol.beats li { margin: 2px 0; }
+      ul.events { color: var(--dim); }
+      ol.beats li { color: var(--text); }
+    </style>
+  </head>
+  <body>
+    <header class="app">
+      <h1>召唤物运行模块 · 演示面板</h1>
+      <p>状态内核不依赖画面节点；每个对象有稳定身份、命令来源与回收原因。选择场景后点「单步」或「自动播放」。</p>
+    </header>
+    <div id="controls"></div>
+    <main id="panel"></main>
+    <script type="module" src="../dist/ui/main.js"></script>
+  </body>
+</html>
