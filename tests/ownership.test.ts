@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { SummonKernel, poolKeys } from '../src/kernel/kernel.js';
+import { SummonKernel } from '../src/kernel/kernel.js';
+import { subordinatePoolKey, summonPoolKey } from '../src/kernel/quota.js';
 import { OwnershipGraph } from '../src/kernel/ownership.js';
 
 function spawnOne(kernel: SummonKernel, playerId: string, name?: string): string {
@@ -51,8 +52,8 @@ describe('ownership transfer vs destruction', () => {
     expect(view.status).toBe('active');
     expect(view.ownerId).toBe(betty);
     expect(view.commanderId).toBe(betty);
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(akai)).used).toBe(0);
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(betty)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(akai)).used).toBe(0);
+    expect(kernel.quota.usage(summonPoolKey(betty)).used).toBe(1);
     expect(kernel.ownership.rootOf(wolf)).toBe(betty);
   });
 
@@ -67,8 +68,8 @@ describe('ownership transfer vs destruction', () => {
     expect(result.ok).toBe(false);
     const view = kernel.entityView(wolf)!;
     expect(view.ownerId).toBe(akai);
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(akai)).used).toBe(1);
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(betty)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(akai)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(betty)).used).toBe(1);
   });
 
   it('rejects transfers that would create a cycle or break depth limits', () => {
@@ -97,6 +98,6 @@ describe('ownership transfer vs destruction', () => {
 
     expect(kernel.transferOwnership(golem, betty).ok).toBe(true);
     expect(kernel.ownership.chainToRoot('subordinate-1')).toEqual(['subordinate-1', golem, betty]);
-    expect(kernel.quota.usage(poolKeys.subordinatePoolKey(golem)).used).toBe(1);
+    expect(kernel.quota.usage(subordinatePoolKey(golem)).used).toBe(1);
   });
 });

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { SummonKernel, poolKeys } from '../src/kernel/kernel.js';
+import { SummonKernel } from '../src/kernel/kernel.js';
+import { summonPoolKey } from '../src/kernel/quota.js';
 
 describe('same-tick contention', () => {
   it('admits exactly one request per free slot, deterministically by submission order', () => {
@@ -18,7 +19,7 @@ describe('same-tick contention', () => {
     const rejected = events.filter((e) => e.type === 'request-rejected').map((e) => e.requestId);
     expect(accepted).toContain(a);
     expect(rejected).toEqual(expect.arrayContaining([b, c]));
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(2);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(2);
   });
 
   it('never over-commits quota when many requests race for full pools', () => {
@@ -28,7 +29,7 @@ describe('same-tick contention', () => {
       kernel.requestSummon(player, { name: `竞争${i}`, onFull: 'reject' });
     }
     kernel.advanceTick();
-    const usage = kernel.quota.usage(poolKeys.summonPoolKey(player));
+    const usage = kernel.quota.usage(summonPoolKey(player));
     expect(usage.used).toBe(3);
     const live = kernel.listViews().filter((v) => v.kind === 'summon' && v.status === 'active');
     expect(live).toHaveLength(3);

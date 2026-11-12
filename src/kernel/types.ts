@@ -1,5 +1,15 @@
 export type EntityId = string;
 
+/** Command-style outcome: nothing to return on success. */
+export type Result = { ok: true } | { ok: false; why: string };
+
+/**
+ * Query-style outcome: an explicit value on success, an explicit failure
+ * otherwise. Lookups must never silently substitute a default (such as the
+ * local player) when the requested entity is not in the current scene.
+ */
+export type Resolution<T> = { ok: true; value: T } | { ok: false; why: string };
+
 export type EntityKind = 'player' | 'summon' | 'subordinate' | 'hostile';
 
 export type EntityStatus = 'active' | 'exiting' | 'recycled';

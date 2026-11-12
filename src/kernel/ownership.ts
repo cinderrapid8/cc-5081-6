@@ -1,4 +1,4 @@
-import type { EntityId } from './types.js';
+import type { EntityId, Resolution } from './types.js';
 
 export class OwnershipError extends Error {}
 
@@ -26,23 +26,41 @@ export class OwnershipGraph {
 
   /** Path from id up to the root, id first. Terminates via visited set. */
   chainToRoot(id: EntityId): EntityId[] {
+    const resolved = this.resolveChain(id);
+    if (!resolved.ok) throw new OwnershipError(resolved.why);
+    return resolved.value;
+  }
+
+  /**
+   * Non-throwing chain query for boundary callers: a corrupted graph yields
+   * an explicit failure instead of an exception. Note the graph only knows
+   * edges — an id with no parent resolves to itself, so "is this entity in
+   * the current scene at all" must be answered by the registry, not here.
+   */
+  resolveChain(id: EntityId): Resolution<EntityId[]> {
     const chain: EntityId[] = [];
     const seen = new Set<EntityId>();
     let current: EntityId | undefined = id;
     while (current !== undefined) {
       if (seen.has(current)) {
-        throw new OwnershipError(`ownership cycle detected at ${current}`);
+        return { ok: false, why: `ownership cycle detected at ${current}` };
       }
       seen.add(current);
       chain.push(current);
       current = this.parent.get(current);
     }
-    return chain;
+    return { ok: true, value: chain };
   }
 
   rootOf(id: EntityId): EntityId {
     const chain = this.chainToRoot(id);
     return chain[chain.length - 1]!;
+  }
+
+  resolveRoot(id: EntityId): Resolution<EntityId> {
+    const chain = this.resolveChain(id);
+    if (!chain.ok) return chain;
+    return { ok: true, value: chain.value[chain.value.length - 1]! };
   }
 
   isAncestorOrSelf(ancestor: EntityId, id: EntityId): boolean {

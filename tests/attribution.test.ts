@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { SummonKernel } from '../src/kernel/kernel.js';
+import { SummonKernel, type EffectExplanation } from '../src/kernel/kernel.js';
+import type { Resolution } from '../src/kernel/types.js';
+
+function mustExplain(resolution: Resolution<EffectExplanation>): EffectExplanation {
+  if (!resolution.ok) throw new Error(resolution.why);
+  return resolution.value;
+}
 
 describe('effect attribution', () => {
   it('resolves the legal source after the whole tree was recycled', () => {
@@ -18,7 +24,7 @@ describe('effect attribution', () => {
     expect(kernel.entityView('summon-1')!.status).toBe('recycled');
     expect(kernel.entityView(akai)!.status).toBe('recycled');
 
-    const explanation = kernel.explainEffect(effect.effectId);
+    const explanation = mustExplain(kernel.explainEffect(effect.effectId));
     expect(explanation.legalSourceId).toBe(akai);
     expect(explanation.legalSourceName).toBe('阿凯');
     expect(explanation.chain.map((c) => c.name)).toEqual(['炮台', '魔像', '阿凯']);
@@ -37,8 +43,8 @@ describe('effect attribution', () => {
     kernel.transferOwnership('summon-1', betty);
     const after = kernel.recordEffect('summon-1', 'damage', '转让后撕咬');
 
-    expect(kernel.explainEffect(before.effectId).legalSourceId).toBe(akai);
-    expect(kernel.explainEffect(after.effectId).legalSourceId).toBe(betty);
+    expect(mustExplain(kernel.explainEffect(before.effectId)).legalSourceId).toBe(akai);
+    expect(mustExplain(kernel.explainEffect(after.effectId)).legalSourceId).toBe(betty);
   });
 
   it('rejects effects from inactive sources', () => {
@@ -48,5 +54,27 @@ describe('effect attribution', () => {
     kernel.advanceTick();
     kernel.dismiss('summon-1', akai);
     expect(() => kernel.recordEffect('summon-1', 'damage', '幽灵攻击')).toThrow();
+  });
+
+  it('fails explicitly for unknown effects instead of throwing', () => {
+    const kernel = new SummonKernel();
+    const resolved = kernel.explainEffect('fx-404');
+    expect(resolved.ok).toBe(false);
+    if (!resolved.ok) expect(resolved.why).toContain('unknown effect');
+  });
+
+  it('fails explicitly when the chain references entities outside the scene', () => {
+    const kernel = new SummonKernel();
+    kernel.registerPlayer('阿凯');
+    // journal entry whose chain points at ids the registry never saw
+    const entry = kernel.journal.record(0, 'ghost-1', ['ghost-1', 'nowhere-1'], 'damage', 'x', null);
+    const resolved = kernel.explainEffect(entry.effectId);
+    expect(resolved.ok).toBe(false);
+    if (!resolved.ok) expect(resolved.why).toContain('not in the current scene');
+    // and crucially: no fallback to the only player in the scene
+    expect(kernel.explainEffect(entry.effectId)).not.toMatchObject({
+      ok: true,
+      value: { legalSourceId: 'player-1' },
+    });
   });
 });

@@ -1,15 +1,28 @@
 import { EffectJournal, type EffectEntry } from './attribution.js';
+import {
+  applyCommand,
+  availabilityCommandState,
+  spawnInheritance,
+  transferredCommandState,
+} from './command-inheritance.js';
 import { CommandRouter } from './commands.js';
 import { IdGenerator } from './ids.js';
+import { LifecycleService } from './lifecycle.js';
 import { OwnershipGraph } from './ownership.js';
-import { QuotaLedger } from './quota.js';
+import {
+  QuotaLedger,
+  pickReplacementVictim,
+  subordinatePoolKey,
+  summonPoolKey,
+} from './quota.js';
 import { EntityRegistry, type EntityRecord } from './registry.js';
 import type {
   Command,
-  CommandSource,
   EntityId,
   KernelEvent,
   RecycleReason,
+  Resolution,
+  Result,
 } from './types.js';
 
 export interface KernelConfig {
@@ -31,8 +44,6 @@ export const DEFAULT_CONFIG: KernelConfig = {
 };
 
 export type FullPoolPolicy = 'replace-oldest' | 'reject';
-
-export type Result = { ok: true } | { ok: false; why: string };
 
 interface QueuedRequest {
   requestId: string;
@@ -75,19 +86,21 @@ export interface EffectExplanation {
   legalSourceName: string;
 }
 
-const summonPoolKey = (playerId: EntityId) => `summon:${playerId}`;
-const subordinatePoolKey = (summonId: EntityId) => `subordinate:${summonId}`;
-
 /**
- * Summon runtime kernel. Pure state machine: no timers, no DOM, no scene
- * nodes. The outside world drives it with requests and advanceTick(); views
- * attach by entity id and may be torn down freely without touching state.
+ * Summon runtime kernel: composition root over four bounded components —
+ * ownership traversal (OwnershipGraph), quota accounting (QuotaLedger),
+ * command inheritance (command-inheritance.ts) and entity cleanup
+ * (LifecycleService) — plus the identity registry, command router and effect
+ * journal. Pure state machine: no timers, no DOM, no scene nodes. The
+ * outside world drives it with requests and advanceTick(); views attach by
+ * entity id and may be torn down freely without touching state.
  */
 export class SummonKernel {
   readonly registry = new EntityRegistry();
   readonly ownership: OwnershipGraph;
   readonly quota = new QuotaLedger();
   readonly journal: EffectJournal;
+  readonly lifecycle: LifecycleService;
 
   private readonly router: CommandRouter;
   private readonly ids = new IdGenerator();
@@ -102,6 +115,13 @@ export class SummonKernel {
     this.ownership = new OwnershipGraph(this.config.maxOwnershipDepth);
     this.journal = new EffectJournal(this.ids);
     this.router = new CommandRouter(this.registry, this.ownership);
+    this.lifecycle = new LifecycleService({
+      registry: this.registry,
+      ownership: this.ownership,
+      quota: this.quota,
+      emit: (event) => this.emit(event),
+      config: { exitGraceTicks: this.config.exitGraceTicks },
+    });
   }
 
   get tick(): number {
@@ -196,8 +216,8 @@ export class SummonKernel {
     this.tickCount += 1;
     const from = this.events.length;
     this.drainRequests();
-    this.ageEntities();
-    this.finalizeExits();
+    this.lifecycle.ageEntities(this.tickCount);
+    this.lifecycle.finalizeExits(this.tickCount);
     return this.events.slice(from);
   }
 
@@ -230,10 +250,12 @@ export class SummonKernel {
     if (this.quota.acquire(poolKey)) {
       id = this.ids.next(request.kind);
     } else if (request.onFull === 'replace-oldest') {
-      const victim = this.pickReplacement(poolKey);
-      if (victim) {
+      const victimId = pickReplacementVictim(
+        this.registry.allLive().filter((e) => e.quotaKey === poolKey),
+      );
+      if (victimId) {
         id = this.ids.next(request.kind);
-        this.finalizeRecycle(victim.id, { type: 'replaced', by: id });
+        this.lifecycle.finalizeRecycle(victimId, { type: 'replaced', by: id }, this.tickCount);
         this.quota.acquire(poolKey);
       }
     }
@@ -241,14 +263,6 @@ export class SummonKernel {
 
     this.spawnCompanion(id, request.kind, owner, request.name, poolKey);
     this.emit({ tick: this.tickCount, type: 'request-accepted', requestId: request.requestId, entityId: id });
-  }
-
-  private pickReplacement(poolKey: string): EntityRecord | null {
-    const holders = this.registry
-      .allLive()
-      .filter((e) => e.quotaKey === poolKey)
-      .sort((a, b) => a.spawnedAtTick - b.spawnedAtTick || a.id.localeCompare(b.id));
-    return holders.find((e) => e.status === 'active') ?? holders[0] ?? null;
   }
 
   private spawnCompanion(
@@ -260,21 +274,14 @@ export class SummonKernel {
   ): void {
     const record = this.baseRecord(id, kind, name ?? `${kind} ${id}`);
     record.ownerId = owner.id;
-    record.stance = owner.stance;
-    record.currentTargetId = owner.currentTargetId;
     record.lifespanRemaining =
       kind === 'summon' ? this.config.summonLifespan : this.config.subordinateLifespan;
     record.quotaKey = poolKey;
-    if (owner.kind === 'player' && !owner.available) {
-      record.commanderId = id;
-      record.commandSource = {
-        type: 'autonomous',
-        why: `owner ${owner.name} unavailable at spawn — self-directed`,
-      };
-    } else {
-      record.commanderId = owner.id;
-      record.commandSource = { type: 'owner', why: `takes orders from ${owner.name}` };
-    }
+    const inheritance = spawnInheritance(id, owner);
+    record.stance = inheritance.stance;
+    record.currentTargetId = inheritance.currentTargetId;
+    record.commanderId = inheritance.commanderId;
+    record.commandSource = inheritance.commandSource;
     this.registry.add(record);
     this.ownership.attach(id, owner.id);
     this.emit({
@@ -288,49 +295,11 @@ export class SummonKernel {
     this.emitQuota(poolKey);
   }
 
-  private ageEntities(): void {
-    for (const record of this.registry.allLive()) {
-      if (record.status !== 'active' || record.lifespanRemaining === null) continue;
-      if (record.spawnedAtTick === this.tickCount) continue;
-      record.lifespanRemaining -= 1;
-      if (record.lifespanRemaining <= 0) {
-        this.beginExit(record.id, { type: 'lifespan-expired' });
-      }
-    }
-  }
-
-  private finalizeExits(): void {
-    for (const record of this.registry.allLive()) {
-      if (
-        record.status === 'exiting' &&
-        record.exitFinalizeTick !== null &&
-        record.exitFinalizeTick <= this.tickCount
-      ) {
-        this.finalizeRecycle(record.id, record.pendingRecycleReason ?? { type: 'lifespan-expired' });
-      }
-    }
-  }
-
   // --------------------------------------------------------------- lifecycle
 
+  /** Exit entry point: delegates to the lifecycle service at the current tick. */
   beginExit(id: EntityId, reason: RecycleReason): Result {
-    const record = this.registry.getLive(id);
-    if (!record || record.status === 'recycled') return { ok: false, why: 'entity is not live' };
-    if (record.status === 'exiting') return { ok: false, why: 'entity is already exiting' };
-    record.status = 'exiting';
-    record.pendingRecycleReason = reason;
-    record.exitFinalizeTick = this.tickCount + this.config.exitGraceTicks;
-    this.emit({
-      tick: this.tickCount,
-      type: 'exit-began',
-      id,
-      finalizeTick: record.exitFinalizeTick,
-      reason,
-    });
-    if (this.config.exitGraceTicks === 0) {
-      this.finalizeRecycle(id, reason);
-    }
-    return { ok: true };
+    return this.lifecycle.beginExit(id, reason, this.tickCount);
   }
 
   dismiss(id: EntityId, byId: EntityId): Result {
@@ -339,35 +308,12 @@ export class SummonKernel {
     if (!this.router.canCommand(byId, id)) {
       return { ok: false, why: `${byId} has no command authority over ${id}` };
     }
-    return this.beginExit(id, { type: 'dismissed', by: byId });
+    return this.lifecycle.beginExit(id, { type: 'dismissed', by: byId }, this.tickCount);
   }
 
-  /**
-   * Terminal teardown. Distinct from ownership transfer: the record moves to
-   * the tombstone registry, its quota slot is released, and subordinates are
-   * cascade-recycled first. Identity stays resolvable for attribution.
-   */
+  /** Terminal teardown callback: delegates to the lifecycle service. */
   finalizeRecycle(id: EntityId, reason: RecycleReason): void {
-    const record = this.registry.getLive(id);
-    if (!record) return;
-    for (const child of this.ownership.childrenOf(id)) {
-      this.finalizeRecycle(child, { type: 'owner-recycled', ownerId: id });
-    }
-    this.ownership.detach(id);
-    record.status = 'recycled';
-    record.recycleReason = reason;
-    record.recycledAtTick = this.tickCount;
-    record.pendingRecycleReason = null;
-    record.exitFinalizeTick = null;
-    record.lifespanRemaining = null;
-    record.commanderId = null;
-    record.commandSource = { type: 'autonomous', why: 'recycled — no commander' };
-    if (record.quotaKey) {
-      this.quota.release(record.quotaKey);
-      this.emitQuota(record.quotaKey);
-    }
-    this.registry.retire(id);
-    this.emit({ tick: this.tickCount, type: 'recycled', id, reason });
+    this.lifecycle.finalizeRecycle(id, reason, this.tickCount);
   }
 
   // -------------------------------------------------------------- ownership
@@ -413,11 +359,9 @@ export class SummonKernel {
     this.ownership.attach(entityId, newOwnerId);
     record.ownerId = newOwnerId;
     record.quotaKey = newKey;
-    record.commanderId = newOwnerId;
-    record.commandSource = {
-      type: 'owner',
-      why: `takes orders from ${newOwner.name} (ownership transferred)`,
-    };
+    const commandState = transferredCommandState(newOwner);
+    record.commanderId = commandState.commanderId;
+    record.commandSource = commandState.commandSource;
     this.emitQuota(newKey);
     this.emit({
       tick: this.tickCount,
@@ -445,17 +389,10 @@ export class SummonKernel {
       if (record.kind !== 'summon' && record.kind !== 'subordinate') continue;
       if (record.status !== 'active') continue;
       if (this.ownership.rootOf(record.id) !== playerId) continue;
-      if (!available) {
-        record.commanderId = record.id;
-        record.commandSource = {
-          type: 'autonomous',
-          why: `owner ${player.name} unavailable — holding last orders`,
-        };
-      } else {
-        const owner = this.registry.mustGet(record.ownerId!);
-        record.commanderId = record.ownerId;
-        record.commandSource = { type: 'owner', why: `takes orders from ${owner.name}` };
-      }
+      const owner = this.registry.mustGet(record.ownerId!);
+      const state = availabilityCommandState(record, player, owner, available);
+      record.commanderId = state.commanderId;
+      record.commandSource = state.commandSource;
       this.emit({
         tick: this.tickCount,
         type: 'command-source-changed',
@@ -492,23 +429,11 @@ export class SummonKernel {
     const permission = this.router.checkTargetPermission(target, command);
     if (!permission.ok) return reject(permission.why);
 
-    if (command.type === 'attack') {
-      target.currentTargetId = command.targetId;
-      target.followTargetId = null;
-      for (const childId of this.ownership.childrenOf(targetId)) {
-        const child = this.registry.getLive(childId);
-        if (child && child.status === 'active') child.currentTargetId = command.targetId;
-      }
-    } else if (command.type === 'follow') {
-      target.followTargetId = command.targetId;
-      target.currentTargetId = null;
-    } else {
-      target.stance = command.stance;
-      for (const childId of this.ownership.childrenOf(targetId)) {
-        const child = this.registry.getLive(childId);
-        if (child && child.status === 'active') child.stance = command.stance;
-      }
-    }
+    const children = this.ownership
+      .childrenOf(targetId)
+      .map((childId) => this.registry.getLive(childId))
+      .filter((child): child is EntityRecord => !!child && child.status === 'active');
+    applyCommand(target, children, command);
     this.emit({ tick: this.tickCount, type: 'command-issued', commanderId, targetId, command });
     return { ok: true };
   }
@@ -539,25 +464,31 @@ export class SummonKernel {
     return entry;
   }
 
-  /** Resolves an effect's legal source even after every party was recycled. */
-  explainEffect(effectId: string): EffectExplanation {
+  /**
+   * Resolves an effect's legal source even after every party was recycled.
+   * Explicit failure contract: unknown effects and chains referencing
+   * entities outside the current scene fail with a reason — the legal source
+   * is never defaulted to a placeholder or the local player.
+   */
+  explainEffect(effectId: string): Resolution<EffectExplanation> {
     const entry = this.journal.get(effectId);
-    if (!entry) throw new Error(`unknown effect: ${effectId}`);
-    const chain = entry.chain.map((id) => {
+    if (!entry) return { ok: false, why: `unknown effect: ${effectId}` };
+    const chain: EffectExplanation['chain'] = [];
+    for (const id of entry.chain) {
       const record = this.registry.get(id);
       if (!record) {
-        return { id, name: id, kind: 'hostile' as const, status: 'recycled' as const, recycleReason: null };
+        return { ok: false, why: `ownership chain broken: ${id} is not in the current scene` };
       }
-      return {
+      chain.push({
         id,
         name: record.name,
         kind: record.kind,
         status: record.status,
         recycleReason: record.recycleReason,
-      };
-    });
+      });
+    }
     const legal = chain[chain.length - 1]!;
-    return { entry, chain, legalSourceId: legal.id, legalSourceName: legal.name };
+    return { ok: true, value: { entry, chain, legalSourceId: legal.id, legalSourceName: legal.name } };
   }
 
   // ------------------------------------------------------------------ views
@@ -605,5 +536,3 @@ export class SummonKernel {
     });
   }
 }
-
-export const poolKeys = { summonPoolKey, subordinatePoolKey };

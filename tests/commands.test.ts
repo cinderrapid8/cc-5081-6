@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { SummonKernel, poolKeys } from '../src/kernel/kernel.js';
+import { SummonKernel } from '../src/kernel/kernel.js';
+import { subordinatePoolKey, summonPoolKey } from '../src/kernel/quota.js';
 
 function setup() {
   const kernel = new SummonKernel();
@@ -71,12 +72,13 @@ describe('owner temporarily unavailable', () => {
       expect(view.commandWhy).toContain('unavailable');
       expect(view.ownerId).not.toBeNull();
     }
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(akai)).used).toBe(1);
-    expect(kernel.quota.usage(poolKeys.subordinatePoolKey(summon)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(akai)).used).toBe(1);
+    expect(kernel.quota.usage(subordinatePoolKey(summon)).used).toBe(1);
 
     // effects recorded during the outage still attribute to the owner
     const effect = kernel.recordEffect(summon, 'damage', '自主攻击');
-    expect(kernel.explainEffect(effect.effectId).legalSourceId).toBe(akai);
+    const explanation = kernel.explainEffect(effect.effectId);
+    expect(explanation.ok && explanation.value.legalSourceId).toBe(akai);
 
     kernel.setPlayerAvailability(akai, true);
     expect(kernel.entityView(summon)!.commanderId).toBe(akai);
@@ -98,6 +100,6 @@ describe('owner temporarily unavailable', () => {
       ownerId: summon,
     });
     expect(kernel.entityView(akai)!.recycleReason).toEqual({ type: 'owner-left', ownerId: akai });
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(akai)).used).toBe(0);
+    expect(kernel.quota.usage(summonPoolKey(akai)).used).toBe(0);
   });
 });

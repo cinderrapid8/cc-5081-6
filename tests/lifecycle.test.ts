@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { SummonKernel, poolKeys } from '../src/kernel/kernel.js';
+import { SummonKernel } from '../src/kernel/kernel.js';
+import { subordinatePoolKey, summonPoolKey } from '../src/kernel/quota.js';
 
 function spawnOne(kernel: SummonKernel, playerId: string, name?: string) {
   const req = kernel.requestSummon(playerId, { name });
@@ -41,7 +42,7 @@ describe('lifecycle', () => {
       .getEvents()
       .find((e) => e.type === 'request-rejected' && e.requestId === req);
     expect(rejected).toBeTruthy();
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(3);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(3);
   });
 
   it('consecutive replacement keeps live count at cap and tombstones the replaced', () => {
@@ -50,7 +51,7 @@ describe('lifecycle', () => {
     const seen: string[] = [];
     for (let i = 0; i < 10; i++) {
       seen.push(spawnOne(kernel, player, `战宠${i}`));
-      const usage = kernel.quota.usage(poolKeys.summonPoolKey(player));
+      const usage = kernel.quota.usage(summonPoolKey(player));
       expect(usage.used).toBeLessThanOrEqual(3);
     }
     const live = kernel.listViews().filter((v) => v.kind === 'summon' && v.status !== 'recycled');
@@ -83,16 +84,16 @@ describe('lifecycle', () => {
     expect(
       kernel.getEvents().some((e) => e.type === 'request-rejected' && e.requestId === req),
     ).toBe(true);
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(1);
 
     kernel.advanceTick(); // grace expires, finalize
     kernel.advanceTick();
     expect(kernel.entityView(first)!.status).toBe('recycled');
     expect(kernel.entityView(first)!.recycleReason?.type).toBe('lifespan-expired');
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(0);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(0);
 
     spawnOne(kernel, player, '后来者');
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(1);
   });
 
   it('replace-oldest can force-finalize an exiting summon to reclaim its slot', () => {
@@ -104,7 +105,7 @@ describe('lifecycle', () => {
 
     const second = spawnOne(kernel, player, '替换者');
     expect(kernel.entityView(first)!.recycleReason).toEqual({ type: 'replaced', by: second });
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(1);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(1);
   });
 
   it('dismiss requires command authority and recycles after the grace period', () => {
@@ -136,7 +137,7 @@ describe('lifecycle', () => {
     const sub = kernel.entityView('subordinate-1')!;
     expect(sub.status).toBe('recycled');
     expect(sub.recycleReason).toEqual({ type: 'owner-recycled', ownerId: golem });
-    expect(kernel.quota.usage(poolKeys.subordinatePoolKey(golem)).used).toBe(0);
-    expect(kernel.quota.usage(poolKeys.summonPoolKey(player)).used).toBe(0);
+    expect(kernel.quota.usage(subordinatePoolKey(golem)).used).toBe(0);
+    expect(kernel.quota.usage(summonPoolKey(player)).used).toBe(0);
   });
 });

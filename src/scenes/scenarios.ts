@@ -75,7 +75,8 @@ function* scenarioExit(kernel: SummonKernel): Generator<string, void, void> {
   yield '连续推进 tick：萤火寿命到期 → exiting → 回收；苍狼宽限期结束 → 回收';
 
   const explanation = kernel.explainEffect('fx-1');
-  yield `查询 fx-1 的合法来源：${explanation.chain.map((c) => c.name).join(' → ')}（萤火已回收仍可定位）`;
+  if (!explanation.ok) throw new Error(explanation.why);
+  yield `查询 fx-1 的合法来源：${explanation.value.chain.map((c) => c.name).join(' → ')}（萤火已回收仍可定位）`;
 }
 
 function* scenarioReplace(kernel: SummonKernel): Generator<string, void, void> {
@@ -167,7 +168,8 @@ function* scenarioTransfer(kernel: SummonKernel): Generator<string, void, void> 
 
   const fx1 = kernel.explainEffect('fx-1');
   const fx2 = kernel.explainEffect('fx-2');
-  yield `fx-1 合法来源：${fx1.legalSourceName}；fx-2 合法来源：${fx2.legalSourceName}`;
+  if (!fx1.ok || !fx2.ok) throw new Error(!fx1.ok ? fx1.why : !fx2.ok ? fx2.why : '');
+  yield `fx-1 合法来源：${fx1.value.legalSourceName}；fx-2 合法来源：${fx2.value.legalSourceName}`;
 }
 
 export const SCENARIOS: Scenario[] = [

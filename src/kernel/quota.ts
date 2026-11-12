@@ -1,7 +1,31 @@
+import type { EntityId, EntityStatus } from './types.js';
+
 export interface QuotaUsage {
   key: string;
   used: number;
   cap: number;
+}
+
+export const summonPoolKey = (playerId: EntityId): string => `summon:${playerId}`;
+export const subordinatePoolKey = (summonId: EntityId): string => `subordinate:${summonId}`;
+
+export interface SlotHolder {
+  id: EntityId;
+  spawnedAtTick: number;
+  status: EntityStatus;
+}
+
+/**
+ * replace-oldest policy: among the live holders of a full pool, prefer the
+ * oldest active one; fall back to the oldest exiting holder so its slot can
+ * be force-finalized. Pure selection — the caller performs the recycle and
+ * the slot handover.
+ */
+export function pickReplacementVictim(holders: readonly SlotHolder[]): EntityId | null {
+  const sorted = [...holders].sort(
+    (a, b) => a.spawnedAtTick - b.spawnedAtTick || a.id.localeCompare(b.id),
+  );
+  return (sorted.find((h) => h.status === 'active') ?? sorted[0])?.id ?? null;
 }
 
 /**

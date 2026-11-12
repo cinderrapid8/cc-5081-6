@@ -94,7 +94,12 @@ function renderEffects(kernel: SummonKernel, container: HTMLElement): void {
   if (effects.length === 0) return;
   const list = el('ul', 'effects');
   for (const effect of effects) {
-    const explanation = kernel.explainEffect(effect.effectId);
+    const resolved = kernel.explainEffect(effect.effectId);
+    if (!resolved.ok) {
+      list.append(el('li', undefined, `${effect.effectId} 归属无法解析：${resolved.why}`));
+      continue;
+    }
+    const explanation = resolved.value;
     const chainText = explanation.chain
       .map((c) => `${c.name}${c.status === 'recycled' ? '（已回收）' : ''}`)
       .join(' → ');

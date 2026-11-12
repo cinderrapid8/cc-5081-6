@@ -65,6 +65,7 @@ describe('scenario playback invariants', () => {
     const effect = kernel.recordEffect('summon-1', 'damage', '撕咬');
     kernel.removePlayer(akai);
     // business query after teardown still resolves the legal source
-    expect(kernel.explainEffect(effect.effectId).legalSourceId).toBe(akai);
+    const explanation = kernel.explainEffect(effect.effectId);
+    expect(explanation.ok && explanation.value.legalSourceId).toBe(akai);
   });
 });
